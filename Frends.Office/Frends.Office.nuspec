@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>Frends.Office</id>
+    <version>1.0.0.0</version>
+    <title>Frends Microsoft.Office</title>
+    <authors>HiQ Poland</authors>
+    <owners />
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>FRENDS Microsoft.Office tasks used for file writing, such as Excel files from csv.</description>
+    <summary />
+    <dependencies>
+      <group targetFramework=".NETFramework4.5.2" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System" />
+      <frameworkAssembly assemblyName="System.Data" />
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <file src="bin\Release\Frends.Office.dll" target="lib\net452\Frends.Office.dll" />
+    <file src="bin\Release\Frends.Office.XML" target="Frends.Office.XML"/>
+  </files>
+</package>

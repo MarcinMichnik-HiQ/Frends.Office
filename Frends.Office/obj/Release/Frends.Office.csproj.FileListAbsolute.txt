@@ -1,0 +1,9 @@
+C:\Users\Marcin\Documents\Frends.Office\Frends.Office\Frends.Office\bin\Release\Frends.Office.dll
+C:\Users\Marcin\Documents\Frends.Office\Frends.Office\Frends.Office\bin\Release\Frends.Office.pdb
+C:\Users\Marcin\Documents\Frends.Office\Frends.Office\Frends.Office\obj\Release\Frends.Office.csprojAssemblyReference.cache
+C:\Users\Marcin\Documents\Frends.Office\Frends.Office\Frends.Office\obj\Release\Frends.Office.csproj.CoreCompileInputs.cache
+C:\Users\Marcin\Documents\Frends.Office\Frends.Office\Frends.Office\obj\Release\Frends.Office.dll
+C:\Users\Marcin\Documents\Frends.Office\Frends.Office\Frends.Office\obj\Release\Frends.Office.pdb
+C:\Users\Marcin\Documents\Frends.Office\Frends.Office\Frends.Office\obj\Release\Frends.Office.csproj.GenerateResource.cache
+C:\Users\Marcin\Documents\Frends.Office\Frends.Office\Frends.Office\bin\Release\Frends.Office.xml
+C:\Users\Marcin\Documents\Frends.Office\Frends.Office\Frends.Office\obj\Release\Frends.Office.Properties.Resources.resources

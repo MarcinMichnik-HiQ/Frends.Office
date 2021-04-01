@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Frends.Office</name>
+    </assembly>
+    <members>
+        <member name="T:Frends.Office.Input">
+            <summary>
+            Input for the excel task
+            </summary>
+        </member>
+        <member name="P:Frends.Office.Input.CsvString">
+            <summary>
+            Input csv string.
+            </summary>
+        </member>
+        <member name="P:Frends.Office.Input.Delimiter">
+            <summary>
+            Determines what character will be used for splitting based on cell in csv. Deafult is ';'.
+            </summary>
+        </member>
+        <member name="P:Frends.Office.Input.IncludeHeaders">
+            <summary>
+            If input csv includes column names (headers). Type boolean.
+            </summary>
+        </member>
+        <member name="P:Frends.Office.Input.LineDelimiter">
+            <summary>
+            Determines what character will be used for splitting based on line in csv. Deafult is '\n'.
+            </summary>
+        </member>
+        <member name="P:Frends.Office.Input.Path">
+            <summary>
+            Full path of the target file to be written. File format should be .xlsx, e.g. FileName.xlsx
+            </summary>
+        </member>
+        <member name="M:Frends.Office.Input.ExportToExcel">
+            <summary>
+            This method parses the input csv string and returns DataTable object.
+            </summary>
+        </member>
+        <member name="T:Frends.Office.WriteOptions">
+            <summary>
+            Options for the Write Task
+            </summary>
+        </member>
+        <member name="P:Frends.Office.WriteOptions.OverWrite">
+            <summary>
+            What should happen if the file already exist
+            </summary>
+        </member>
+        <member name="T:Frends.Office.Office">
+            <summary>
+            Example task package for handling files
+            </summary>
+            
+        </member>
+        <member name="M:Frends.Office.Office.WriteExcel(Frends.Office.Input,Frends.Office.WriteOptions)">
+            <summary>
+            Allows you to write excel files in .xlsx format.
+            </summary>
+            <param name="input"></param>
+            <param name="options"></param>
+            <returns>Returns true if the file was written to correctly Otherwise throws an exception</returns>
+        </member>
+        <member name="T:Frends.Office.Properties.Resources">
+            <summary>
+              Klasa zasobu wymagająca zdefiniowania typu do wyszukiwania zlokalizowanych ciągów itd.
+            </summary>
+        </member>
+        <member name="P:Frends.Office.Properties.Resources.ResourceManager">
+            <summary>
+            Zwraca buforowane wystąpienie ResourceManager używane przez tę klasę.
+            </summary>
+        </member>
+        <member name="P:Frends.Office.Properties.Resources.Culture">
+            <summary>
+              Przesłania właściwość CurrentUICulture bieżącego wątku dla wszystkich
+              przypadków przeszukiwania zasobów za pomocą tej klasy zasobów wymagającej zdefiniowania typu.
+            </summary>
+        </member>
+    </members>
+</doc>
