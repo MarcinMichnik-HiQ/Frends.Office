@@ -24,11 +24,6 @@
             If input csv includes column names (headers). Type boolean.
             </summary>
         </member>
-        <member name="P:Frends.Office.Input.LineDelimiter">
-            <summary>
-            Determines what character will be used for splitting based on line in csv. Deafult is '\n'.
-            </summary>
-        </member>
         <member name="P:Frends.Office.Input.Path">
             <summary>
             Full path of the target file to be written. File format should be .xlsx, e.g. FileName.xlsx
@@ -39,28 +34,17 @@
             This method parses the input csv string and returns DataTable object.
             </summary>
         </member>
-        <member name="T:Frends.Office.WriteOptions">
-            <summary>
-            Options for the Write Task
-            </summary>
-        </member>
-        <member name="P:Frends.Office.WriteOptions.OverWrite">
-            <summary>
-            What should happen if the file already exist
-            </summary>
-        </member>
         <member name="T:Frends.Office.Office">
             <summary>
-            Example task package for handling files
+            Office task package for handling files, e.g. Excel.
             </summary>
             
         </member>
-        <member name="M:Frends.Office.Office.WriteExcel(Frends.Office.Input,Frends.Office.WriteOptions)">
+        <member name="M:Frends.Office.Office.WriteExcel(Frends.Office.Input)">
             <summary>
             Allows you to write excel files in .xlsx format.
             </summary>
             <param name="input"></param>
-            <param name="options"></param>
             <returns>Returns true if the file was written to correctly Otherwise throws an exception</returns>
         </member>
         <member name="T:Frends.Office.Properties.Resources">

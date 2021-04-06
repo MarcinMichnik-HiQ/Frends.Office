@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Microsoft.Office.Interop.Excel;
+using ClosedXML.Excel;
 
 namespace Frends.Office
 {
@@ -26,12 +26,6 @@ namespace Frends.Office
         public bool IncludeHeaders { get; set; }
 
         /// <summary>
-        /// Determines what character will be used for splitting based on line in csv. Deafult is '\n'.
-        /// </summary>
-        [DefaultValue('\n')]
-        public char LineDelimiter { get; set; }
-
-        /// <summary>
         /// Full path of the target file to be written. File format should be .xlsx, e.g. FileName.xlsx
         /// </summary>
         [DefaultValue(@"c:\temp\file.xlsx")]
@@ -43,11 +37,11 @@ namespace Frends.Office
         public System.Data.DataTable ExportToExcel()
         {
             var parsedResult = new List<Dictionary<string, string>>();
-            var records = CsvString.Split(LineDelimiter);
+            var records = CsvString.Split('\n');
 
             foreach (var record in records)
             {
-                var fields = record.Split(this.Delimiter);
+                var fields = record.Split(Delimiter);
                 var recordItem = new Dictionary<string, string>();
                 var i = 0;
                 foreach (var field in fields)
@@ -83,20 +77,9 @@ namespace Frends.Office
         }
     }
 
-    /// <summary>
-    /// Options for the Write Task
-    /// </summary>
-    public class WriteOptions
-    {
-        /// <summary>
-        /// What should happen if the file already exist
-        /// </summary>
-        [DefaultValue(true)]
-        public bool OverWrite { get; set; }
-    }
 
     /// <summary>
-    /// Example task package for handling files
+    /// Office task package for handling files, e.g. Excel.
     /// </summary>
     /// 
 
@@ -106,74 +89,23 @@ namespace Frends.Office
         /// Allows you to write excel files in .xlsx format.
         /// </summary>
         /// <param name="input"></param>
-        /// <param name="options"></param>
         /// <returns>Returns true if the file was written to correctly Otherwise throws an exception</returns>
-        public static bool WriteExcel(Input input, WriteOptions options)
+        public static bool WriteExcel(Input input)
         {
-            Application excel = new Application();
-            Workbook workbook = excel.Workbooks.Add(Type.Missing);
-            Worksheet worksheet = (Worksheet)workbook.ActiveSheet;
-            Range cellrange;
             try
             {
-                worksheet.Name = "Default";
-
-                System.Data.DataTable d = input.ExportToExcel();
-
-                int rowcount = 0;
-
-                foreach (System.Data.DataRow datarow in d.Rows)
-                {
-                    for (int i = 1; i <= d.Columns.Count; i++)
+                using (System.Data.DataTable dt = input.ExportToExcel()) {
+                    using (var workbook = new XLWorkbook())
                     {
-                        worksheet.Cells[rowcount, i] = datarow[i - 1].ToString();
-
-                        if (rowcount > 3)
-                        {
-                            if (i == d.Columns.Count)
-                            {
-                                if (rowcount % 2 == 0)
-                                {
-                                    cellrange = worksheet.Range[worksheet.Cells[rowcount, 1], worksheet.Cells[rowcount, d.Columns.Count]];
-                                }
-                            }
-                        }
+                        workbook.Worksheets.Add(dt, "Default");
+                        workbook.SaveAs(input.Path);
                     }
                 }
-                cellrange = worksheet.Range[worksheet.Cells[1, 1], worksheet.Cells[2, d.Columns.Count]];
-                cellrange.EntireColumn.AutoFit();
-
-                Borders border = cellrange.Borders;
-                border.LineStyle = XlLineStyle.xlContinuous;
-                border.Weight = 2d;
-
-                cellrange = worksheet.Range[worksheet.Cells[1, 1], worksheet.Cells[2, d.Columns.Count]];
-
-                if (options.OverWrite == true)
-                {
-                    excel.DisplayAlerts = false;
-                    workbook.SaveAs(input.Path, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, XlSaveAsAccessMode.xlNoChange, Type.Missing, Type.Missing, Type.Missing,
-                    Type.Missing, Type.Missing);
-                }
-                else
-                {
-                    workbook.SaveAs(input.Path);
-                }
-
-                workbook.Close();
-                excel.Quit();
-
                 return true;
             }
             catch (Exception ex)
             {
                 throw new Exception("Unable to write file.", ex);
-            }
-            finally
-            {
-                worksheet = null;
-                cellrange = null;
-                workbook = null;
             }
         }
     }
