@@ -13,16 +13,19 @@ namespace Frends.Office
         /// <summary>
         /// Input csv string.
         /// </summary>
+        [DefaultValue("col1;col2\none;two")]
         public string CsvString { get; set; }
 
         /// <summary>
         /// Determines what character will be used for splitting based on cell in csv. Deafult is ';'.
         /// </summary>
+        [DefaultValue(';')]
         public char Delimiter { get; set; }
 
         /// <summary>
         /// If input csv includes column names (headers). Type boolean.
         /// </summary>
+        [DefaultValue(true)]
         public bool IncludeHeaders { get; set; }
 
         /// <summary>
@@ -38,9 +41,12 @@ namespace Frends.Office
         {
             var parsedResult = new List<Dictionary<string, string>>();
             var records = CsvString.Split('\n');
+            System.Data.DataTable table = new System.Data.DataTable();
+            int recordsPerLine = 0;
 
             foreach (var record in records)
             {
+                recordsPerLine = 0;
                 var fields = record.Split(Delimiter);
                 var recordItem = new Dictionary<string, string>();
                 var i = 0;
@@ -48,11 +54,10 @@ namespace Frends.Office
                 {
                     recordItem.Add(i.ToString(), field);
                     i++;
+                    recordsPerLine++;
                 }
                 parsedResult.Add(recordItem);
             }
-
-            System.Data.DataTable table = new System.Data.DataTable();
 
             if (IncludeHeaders == true)
             {
@@ -63,15 +68,26 @@ namespace Frends.Office
                 }
                 parsedResult.RemoveAt(0);
             }
+            else
+            {
+                for (int i = 0; i < recordsPerLine; i++)
+                {
+                    table.Columns.Add(i.ToString(), typeof(string));
+                }
+            }
 
             foreach (Dictionary<string, string> dic in parsedResult)
             {
-                List<string> f = new List<string>();
+                System.Data.DataRow workRow = table.NewRow();
+
+                int counter = 0;
                 foreach (var y in dic)
                 {
-                    f.Add(y.Value);
+                    workRow[counter] = y.Value;
+                    counter++;
                 }
-                table.Rows.Add(f.ToArray());
+
+                table.Rows.Add(workRow);
             }
             return table;
         }
@@ -95,11 +111,21 @@ namespace Frends.Office
             try
             {
                 using (System.Data.DataTable dt = input.ExportToExcel()) {
-                    using (var workbook = new XLWorkbook())
+                    var workbook = new XLWorkbook();
+
+                    if (input.IncludeHeaders == false)
+                    {
+                        var ws = workbook.Worksheets.Add("Default");
+                        ws.FirstRow().FirstCell().InsertData(dt.Rows);
+                    }
+
+                    else
                     {
                         workbook.Worksheets.Add(dt, "Default");
-                        workbook.SaveAs(input.Path);
                     }
+
+                    workbook.SaveAs(input.Path);
+                    
                 }
                 return true;
             }
