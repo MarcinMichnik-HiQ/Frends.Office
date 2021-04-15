@@ -36,3 +36,7 @@ Rebuild the project
 Create a NuGet package
 
 `dotnet pack Frends.Office.nuspec`
+
+# Usage in Frends
+<img width="306" alt="2021-04-15_12h28_01" src="https://user-images.githubusercontent.com/81616998/114855260-09f4a900-9de6-11eb-88cf-5adb871ba7dd.png">
+
