@@ -107,7 +107,7 @@ namespace Frends.Office
     public class Office
     {
         /// <summary>
-        /// Allows you to write excel files in .xlsx format.
+        /// Allows you to write excel files in .xlsx format. https://github.com/MarcinMichnik-HiQ/Frends.Office
         /// </summary>
         /// <param name="input"></param>
         /// <returns>Returns true if the file was written to correctly Otherwise throws an exception</returns>
