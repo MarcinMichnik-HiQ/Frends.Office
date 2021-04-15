@@ -23,6 +23,12 @@ namespace Frends.Office
         public char Delimiter { get; set; }
 
         /// <summary>
+        /// Determines what string will be used for splitting lines. Default is "\r\n".
+        /// </summary>
+        [DefaultValue("\r\n")]
+        public string LineDelimiter { get; set; }
+
+        /// <summary>
         /// If input csv includes column names (headers). Type boolean.
         /// </summary>
         [DefaultValue(true)]
@@ -40,7 +46,8 @@ namespace Frends.Office
         public System.Data.DataTable ExportToExcel()
         {
             var parsedResult = new List<Dictionary<string, string>>();
-            var records = CsvString.Split('\n');
+            var records = CsvString.Split(new string[] { LineDelimiter }, StringSplitOptions.None);
+
             System.Data.DataTable table = new System.Data.DataTable();
             int recordsPerLine = 0;
 
@@ -93,12 +100,10 @@ namespace Frends.Office
         }
     }
 
-
     /// <summary>
     /// Office task package for handling files, e.g. Excel.
     /// </summary>
     /// 
-
     public class Office
     {
         /// <summary>
@@ -117,11 +122,15 @@ namespace Frends.Office
                     {
                         var ws = workbook.Worksheets.Add("Default");
                         ws.FirstRow().FirstCell().InsertData(dt.Rows);
+                        ws.Rows().AdjustToContents();
+                        ws.Columns().AdjustToContents();
                     }
 
                     else
                     {
-                        workbook.Worksheets.Add(dt, "Default");
+                        var ws = workbook.Worksheets.Add(dt, "Default");
+                        ws.Rows().AdjustToContents();
+                        ws.Columns().AdjustToContents();
                     }
 
                     workbook.SaveAs(input.Path);

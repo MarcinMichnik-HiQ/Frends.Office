@@ -19,6 +19,11 @@
             Determines what character will be used for splitting based on cell in csv. Deafult is ';'.
             </summary>
         </member>
+        <member name="P:Frends.Office.Input.LineDelimiter">
+            <summary>
+            Determines what string will be used for splitting lines. Default is "\r\n".
+            </summary>
+        </member>
         <member name="P:Frends.Office.Input.IncludeHeaders">
             <summary>
             If input csv includes column names (headers). Type boolean.
