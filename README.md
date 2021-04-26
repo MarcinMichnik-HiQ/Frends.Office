@@ -58,5 +58,9 @@ Create a NuGet package
 `dotnet pack Frends.Office.nuspec`
 
 # Usage in Frends
+## WriteExcel
 <img width="306" alt="2021-04-15_12h28_01" src="https://user-images.githubusercontent.com/81616998/114855260-09f4a900-9de6-11eb-88cf-5adb871ba7dd.png">
+## ExcelToSharepoint
+<img width="217" alt="2021-04-26_17h13_23" src="https://user-images.githubusercontent.com/81616998/116106792-b66e3f00-a6b2-11eb-95b9-cf2af55b616b.png">
+
 
