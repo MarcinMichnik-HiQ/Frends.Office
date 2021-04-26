@@ -16,19 +16,19 @@ namespace Frends.Office
     public class InputExcelSharepoint
     {
         /// <summary>
-        /// Full path of the target file to be written. File format should be .xlsx, e.g. FileName.xlsx
+        /// Full path of the target file to be written, e.g. FileName.xlsx
         /// </summary>
         [DefaultValue(@"c:\temp\file.xlsx")]
         public string path { get; set; }
 
         /// <summary>
-        /// Full path of the target file to be written. File format should be .xlsx, e.g. FileName.xlsx
+        /// The name of the file, e.g. FileName.xlsx
         /// </summary>
         [DefaultValue(@"file.xlsx")]
         public string fileName { get; set; }
 
         /// <summary>
-        /// Azure AD Site ID
+        /// Azure AD Registered APP Client ID
         /// </summary>
         [DefaultValue("")]
         public string clientID { get; set; }
@@ -40,7 +40,7 @@ namespace Frends.Office
         public string tenantID { get; set; }
 
         /// <summary>
-        /// Azure AD Client Secret
+        /// Azure AD Registered APP Client Secret
         /// </summary>
         [DefaultValue("")]
         public string clientSecret { get; set; }
@@ -58,7 +58,7 @@ namespace Frends.Office
         public string driveID { get; set; }
 
         /// <summary>
-        /// Azure AD Site ID
+        /// Target folder path
         /// </summary>
         [DefaultValue("")]
         public string targetFolderName { get; set; }
@@ -66,7 +66,7 @@ namespace Frends.Office
     }
 
     /// <summary>
-    /// Office task package for handling files, e.g. Excel.
+    /// Office task for sending excel to sharepoint.
     /// </summary>
     /// 
     public class ExcelToSharepointTask
