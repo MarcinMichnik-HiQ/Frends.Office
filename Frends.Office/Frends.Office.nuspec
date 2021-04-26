@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
     <id>Frends.Office</id>
-    <version>1.0.15.0</version>
+    <version>1.0.24.0</version>
     <title>Frends Microsoft.Office</title>
     <authors>HiQ Poland</authors>
     <owners />
@@ -22,5 +22,10 @@
     <file src="bin\Release\ClosedXML.dll" target="lib\net452\ClosedXML.dll" />
     <file src="bin\Release\DocumentFormat.OpenXml.dll" target="lib\net452\DocumentFormat.OpenXml.dll" />
     <file src="bin\Release\ExcelNumberFormat.dll" target="lib\net452\ExcelNumberFormat.dll" />
+    <file src="bin\Release\Microsoft.Graph.dll" target="lib\net452\Microsoft.Graph.dll" />
+    <file src="bin\Release\Microsoft.Graph.Auth.dll" target="lib\net452\Microsoft.Graph.Auth.dll" />
+    <file src="bin\Release\System.Memory.dll" target="lib\net452\System.Memory.dll" />
+    <file src="bin\Release\Microsoft.Identity.Client.dll" target="lib\net452\Microsoft.Identity.Client.dll" />
+    <file src="bin\Release\Microsoft.Graph.Core.dll" target="lib\net452\Microsoft.Graph.Core.dll" />
   </files>
 </package>

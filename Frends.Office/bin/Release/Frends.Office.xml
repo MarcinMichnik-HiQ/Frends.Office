@@ -4,52 +4,111 @@
         <name>Frends.Office</name>
     </assembly>
     <members>
-        <member name="T:Frends.Office.Input">
+        <member name="T:Frends.Office.InputExcelSharepoint">
             <summary>
-            Input for the excel task
+            Input for excel to sharepoint.
             </summary>
+            
         </member>
-        <member name="P:Frends.Office.Input.CsvString">
-            <summary>
-            Input csv string.
-            </summary>
-        </member>
-        <member name="P:Frends.Office.Input.Delimiter">
-            <summary>
-            Determines what character will be used for splitting based on cell in csv. Deafult is ';'.
-            </summary>
-        </member>
-        <member name="P:Frends.Office.Input.LineDelimiter">
-            <summary>
-            Determines what string will be used for splitting lines. Default is "\r\n".
-            </summary>
-        </member>
-        <member name="P:Frends.Office.Input.IncludeHeaders">
-            <summary>
-            If input csv includes column names (headers). Type boolean.
-            </summary>
-        </member>
-        <member name="P:Frends.Office.Input.Path">
+        <member name="P:Frends.Office.InputExcelSharepoint.path">
             <summary>
             Full path of the target file to be written. File format should be .xlsx, e.g. FileName.xlsx
             </summary>
         </member>
-        <member name="M:Frends.Office.Input.ExportToExcel">
+        <member name="P:Frends.Office.InputExcelSharepoint.fileName">
             <summary>
-            This method parses the input csv string and returns DataTable object.
+            Full path of the target file to be written. File format should be .xlsx, e.g. FileName.xlsx
             </summary>
         </member>
-        <member name="T:Frends.Office.Office">
+        <member name="P:Frends.Office.InputExcelSharepoint.clientID">
+            <summary>
+            Azure AD Site ID
+            </summary>
+        </member>
+        <member name="P:Frends.Office.InputExcelSharepoint.tenantID">
+            <summary>
+            Azure AD tenant ID
+            </summary>
+        </member>
+        <member name="P:Frends.Office.InputExcelSharepoint.clientSecret">
+            <summary>
+            Azure AD Client Secret
+            </summary>
+        </member>
+        <member name="P:Frends.Office.InputExcelSharepoint.siteID">
+            <summary>
+            Azure AD Site ID
+            </summary>
+        </member>
+        <member name="P:Frends.Office.InputExcelSharepoint.driveID">
+            <summary>
+            Azure AD Drive ID
+            </summary>
+        </member>
+        <member name="P:Frends.Office.InputExcelSharepoint.targetFolderName">
+            <summary>
+            Azure AD Site ID
+            </summary>
+        </member>
+        <member name="T:Frends.Office.ExcelToSharepointTask">
             <summary>
             Office task package for handling files, e.g. Excel.
             </summary>
             
         </member>
-        <member name="M:Frends.Office.Office.WriteExcel(Frends.Office.Input)">
+        <member name="M:Frends.Office.ExcelToSharepointTask.ExcelToSharepoint(Frends.Office.InputExcelSharepoint)">
             <summary>
-            Allows you to write excel files in .xlsx format.
+            Allows you to send excel files to sharepoint. https://github.com/MarcinMichnik-HiQ/Frends.Office
             </summary>
-            <param name="input"></param>
+            <param name="inputExcelSharepoint"></param>
+            <returns>Returns true if the file was written to correctly Otherwise throws an exception</returns>
+        </member>
+        <member name="T:Frends.Office.InputWriteExcel">
+            <summary>
+            Input for the excel task
+            </summary>
+        </member>
+        <member name="P:Frends.Office.InputWriteExcel.csvString">
+            <summary>
+            Input csv string.
+            </summary>
+        </member>
+        <member name="P:Frends.Office.InputWriteExcel.delimiter">
+            <summary>
+            Determines what character will be used for splitting based on cell in csv. Deafult is ';'.
+            </summary>
+        </member>
+        <member name="P:Frends.Office.InputWriteExcel.lineDelimiter">
+            <summary>
+            Determines what string will be used for splitting lines. Default is "\r\n".
+            </summary>
+        </member>
+        <member name="P:Frends.Office.InputWriteExcel.includeHeaders">
+            <summary>
+            If input csv includes column names (headers). Type boolean.
+            </summary>
+        </member>
+        <member name="P:Frends.Office.InputWriteExcel.path">
+            <summary>
+            Full path of the target file to be written. File format should be .xlsx, e.g. FileName.xlsx
+            </summary>
+        </member>
+        <member name="M:Frends.Office.InputWriteExcel.ExportToExcel">
+            <summary>
+            This method parses the input csv string and returns DataTable object.
+            </summary>
+        </member>
+        <member name="T:Frends.Office.WriteExcelTask">
+            <summary>
+            Office task package for handling files, e.g. Excel.
+            </summary>
+            
+        </member>
+        <member name="M:Frends.Office.WriteExcelTask.WriteExcel(Frends.Office.InputWriteExcel)">
+            <summary>
+            Allows you to write excel files in .xlsx format. https://github.com/MarcinMichnik-HiQ/Frends.Office
+            </summary>
+            <param name="inputWriteExcel"></param>
             <returns>Returns true if the file was written to correctly Otherwise throws an exception</returns>
         </member>
         <member name="T:Frends.Office.Properties.Resources">

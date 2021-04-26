@@ -1,0 +1,10 @@
+{
+  "Tasks": [
+    {
+      "TaskMethod": "Frends.Office.WriteExcelTask.WriteExcel"
+    },
+    {
+      "TaskMethod": "Frends.Office.ExcelToSharepointTask.ExcelToSharepoint"
+    }
+  ]
+}
