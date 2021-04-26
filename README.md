@@ -12,11 +12,11 @@ Reads csv string and converts it to an excel file.
 
 | Property | Type | Description | Example |
 | -------- | -------- | -------- | -------- |
-| CsvString | `string` | Input csv string. | `one;two;three\r\n1;2;3` |
-| Delimiter | `char` | Determines what character will be used for splitting based on cell in csv. | `;` |
-| LineDelimiter | `char` | Determines what string will be used for splitting lines. | "\r\n" |
-| IncludeHeaders | `bool` | If input csv includes column names (headers). | true |
-| Path | `string` | Full path of the target file to be written. File format should be .xlsx. | "c:\temp\file.xlsx" |
+| CsvString | `string` | Input csv string. | `"one;two;three\r\n1;2;3"` |
+| Delimiter | `char` | Determines what character will be used for splitting based on cell in csv. | `';'` |
+| LineDelimiter | `char` | Determines what string will be used for splitting lines. | `"\r\n"` |
+| IncludeHeaders | `bool` | If input csv includes column names (headers). | `true` |
+| Path | `string` | Full path of the target file to be written. File format should be .xlsx. | `@"c:\temp\file.xlsx"` |
 
 ### Returns
 
