@@ -22,6 +22,26 @@ Reads csv string and converts it to an excel file.
 
 Boolean - true if successful.
 
+## ExcelToSharepoint
+
+Finds an excel file at given path and sends it to sharepoint via Microsoft Graph API.
+
+### Properties
+
+| Property | Type | Description | Example |
+| -------- | -------- | -------- | -------- |
+| path | `string` | Path to a local file. | `c:\temp\file.xlsx` |
+| fileName | `string` | The full name and extension of the file (same as in path) | `file.xlsx` |
+| clientID | `string` | Azure Active Directory Site ID | `1ce3f5e1-fc04-3f24-2c0e-v76d5b44b13c` |
+| tenantID | `string` | Azure Active Directory tenant id | `3d426023-5x12-4s11-afae-159b1865eabc` |
+| clientSecret | `string` | Azure Active Directory client secret password | `_Sgx6Jdi2NC1N27Z4_plRm55L-DeCWJ.yq` |
+| siteID | `string` | Azure AD Site ID | `name.sharepoint.com,f7b1c426-4x3c-4a7e-2129-296ed8449b49` |
+| driveID | `string` | Azure AD Drive ID | `b!JsSx1zxNfkeRKSlc2ESbSfp6TF09EspGo2ERaFyAbykdDwKUa4CuRaPGyaagjGIN	` |
+| targetFolderName | `string` | Target folder path | `General/Folder/` |
+
+### Returns
+
+Boolean - true if successful.
 
 # Building
 
