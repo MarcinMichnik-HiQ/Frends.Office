@@ -12,17 +12,17 @@
         </member>
         <member name="P:Frends.Office.InputExcelSharepoint.path">
             <summary>
-            Full path of the target file to be written. File format should be .xlsx, e.g. FileName.xlsx
+            Full path of the target file to be written, e.g. FileName.xlsx
             </summary>
         </member>
         <member name="P:Frends.Office.InputExcelSharepoint.fileName">
             <summary>
-            Full path of the target file to be written. File format should be .xlsx, e.g. FileName.xlsx
+            The name of the file, e.g. FileName.xlsx
             </summary>
         </member>
         <member name="P:Frends.Office.InputExcelSharepoint.clientID">
             <summary>
-            Azure AD Site ID
+            Azure AD Registered APP Client ID
             </summary>
         </member>
         <member name="P:Frends.Office.InputExcelSharepoint.tenantID">
@@ -32,7 +32,7 @@
         </member>
         <member name="P:Frends.Office.InputExcelSharepoint.clientSecret">
             <summary>
-            Azure AD Client Secret
+            Azure AD Registered APP Client Secret
             </summary>
         </member>
         <member name="P:Frends.Office.InputExcelSharepoint.siteID">
@@ -47,12 +47,12 @@
         </member>
         <member name="P:Frends.Office.InputExcelSharepoint.targetFolderName">
             <summary>
-            Azure AD Site ID
+            Target folder path
             </summary>
         </member>
         <member name="T:Frends.Office.ExcelToSharepointTask">
             <summary>
-            Office task package for handling files, e.g. Excel.
+            Office task for sending excel to sharepoint.
             </summary>
             
         </member>

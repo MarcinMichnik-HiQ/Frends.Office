@@ -77,7 +77,7 @@ namespace Frends.Office
         /// </summary>
         /// <param name="inputExcelSharepoint"></param>
         /// <returns>Returns true if the file was written to correctly Otherwise throws an exception</returns>
-        public static async Task<bool> ExcelToSharepoint(InputExcelSharepoint inputExcelSharepoint)
+        public static async Task<string> ExcelToSharepoint(InputExcelSharepoint inputExcelSharepoint)
         {
             IConfidentialClientApplication confidentialClientApplication = ConfidentialClientApplicationBuilder
                 .Create(inputExcelSharepoint.clientID)
@@ -89,54 +89,73 @@ namespace Frends.Office
 
             // Create a new instance of GraphServiceClient with the authentication provider.
             GraphServiceClient graphClient = new GraphServiceClient(authProvider);
-
-            using (var fileStream = System.IO.File.OpenRead(inputExcelSharepoint.path))
+            string fileLength;
+            try
             {
-                // Use properties to specify the conflict behavior
-                // in this case, replace
-                var uploadProps = new DriveItemUploadableProperties
+                using (var fileStream = System.IO.File.OpenRead(inputExcelSharepoint.path))
                 {
-                    ODataType = null,
-                    AdditionalData = new Dictionary<string, object>
+                    fileLength = fileStream.Length.ToString();
+                    try
                     {
-                        { "@microsoft.graph.conflictBehavior", "replace" }
+                        // Use properties to specify the conflict behavior
+                        // in this case, replace
+                        var uploadProps = new DriveItemUploadableProperties
+                        {
+                            ODataType = null,
+                            AdditionalData = new Dictionary<string, object>
+                        {
+                            { "@microsoft.graph.conflictBehavior", "replace" }
+                        }
+                        };
+
+                        // Create the upload session
+                        // itemPath does not need to be a path to an existing item
+                        var uploadSession = await graphClient
+                            .Sites[inputExcelSharepoint.siteID]
+                            .Drives[inputExcelSharepoint.driveID]
+                            .Root
+                            .ItemWithPath(inputExcelSharepoint.targetFolderName + inputExcelSharepoint.fileName)
+                            .CreateUploadSession(uploadProps)
+                            .Request()
+                            .PostAsync();
+
+                        // Max slice size must be a multiple of 320 KiB
+                        int maxSliceSize = 320 * 2048;
+                        var fileUploadTask =
+                            new LargeFileUploadTask<DriveItem>(uploadSession, fileStream, maxSliceSize);
+
+                        // Create a callback that is invoked after each slice is uploaded
+                        IProgress<long> progress = new Progress<long>();
+
+                        try
+                        {
+                            // Upload the file
+                            var uploadResult = await fileUploadTask.UploadAsync(progress);
+                        }
+                        catch (ServiceException ex)
+                        {
+                            throw new Exception("Unable to send file.", ex);
+                        }
                     }
-                };
-
-                // Create the upload session
-                // itemPath does not need to be a path to an existing item
-                var uploadSession = await graphClient
-                    .Sites[inputExcelSharepoint.siteID]
-                    .Drives[inputExcelSharepoint.driveID]
-                    .Root
-                    .ItemWithPath(inputExcelSharepoint.targetFolderName + inputExcelSharepoint.fileName)
-                    .CreateUploadSession(uploadProps)
-                    .Request()
-                    .PostAsync();
-
-                // Max slice size must be a multiple of 320 KiB
-                int maxSliceSize = 320 * 1024;
-                var fileUploadTask =
-                    new LargeFileUploadTask<DriveItem>(uploadSession, fileStream, maxSliceSize);
-
-                // Create a callback that is invoked after each slice is uploaded
-                IProgress<long> progress = new Progress<long>(prog =>
-                {
-                    Console.WriteLine($"Uploaded {prog} bytes of {fileStream.Length} bytes");
-                });
-
-                try
-                {
-                    // Upload the file
-                    var uploadResult = await fileUploadTask.UploadAsync(progress);
-
+                    catch (ServiceException ex) {
+                        throw new Exception("Unable to establish connection to Sharepoint.", ex);
+                    }
                 }
-                catch (ServiceException ex)
-                {
-                    throw new Exception("Unable to send file.", ex);
-                }
-                return true;
             }
+            catch (ServiceException ex) {
+                throw new Exception("Unable to open file.", ex);
+            }
+            string ret = 
+                "FileSize: " + fileLength + "\n"
+                + "Path: " + inputExcelSharepoint.path.ToString() + "\n"
+                + "FileName: " + inputExcelSharepoint.fileName.ToString() + "\n"
+                + "TargetFolderName: " + inputExcelSharepoint.targetFolderName.ToString() + "\n"
+                + "ClientID: " + inputExcelSharepoint.clientID + "\n"
+                + "TenantID: " + inputExcelSharepoint.tenantID.ToString() + "\n"
+                + "SiteID: " + inputExcelSharepoint.siteID.ToString() + "\n"
+                + "DriveID: " + inputExcelSharepoint.driveID.ToString() + "\n";
+            return ret;
         }
     }
 }
+
