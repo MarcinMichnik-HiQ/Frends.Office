@@ -4,112 +4,109 @@
         <name>Frends.Office</name>
     </assembly>
     <members>
-        <member name="T:Frends.Office.InputExcelSharepoint">
+        <member name="T:Frends.Office.ExportFileToSharepointInput">
             <summary>
-            Input for excel to sharepoint.
-            </summary>
-            
-        </member>
-        <member name="P:Frends.Office.InputExcelSharepoint.path">
-            <summary>
-            Full path of the target file to be written, e.g. FileName.xlsx
+            Input class for exporting files to Sharepoint.
             </summary>
         </member>
-        <member name="P:Frends.Office.InputExcelSharepoint.fileName">
+        <member name="M:Frends.Office.ExportFileToSharepointInput.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
             <summary>
-            The name of the file, e.g. FileName.xlsx
+            Constructor used foor deriving fileName from sourceFilePath.
             </summary>
         </member>
-        <member name="P:Frends.Office.InputExcelSharepoint.clientID">
+        <member name="P:Frends.Office.ExportFileToSharepointInput.fileName">
             <summary>
-            Azure AD Registered APP Client ID
+            File name derived from sourceFilePath.
             </summary>
         </member>
-        <member name="P:Frends.Office.InputExcelSharepoint.tenantID">
+        <member name="P:Frends.Office.ExportFileToSharepointInput.sourceFilePath">
             <summary>
-            Azure AD tenant ID
+            Full path of the target file to be written, e.g. c:\FileName.xlsx
             </summary>
         </member>
-        <member name="P:Frends.Office.InputExcelSharepoint.clientSecret">
+        <member name="P:Frends.Office.ExportFileToSharepointInput.clientID">
             <summary>
-            Azure AD Registered APP Client Secret
+            Azure Active Directory Registered APP Client ID
             </summary>
         </member>
-        <member name="P:Frends.Office.InputExcelSharepoint.siteID">
+        <member name="P:Frends.Office.ExportFileToSharepointInput.clientSecret">
             <summary>
-            Azure AD Site ID
+            Azure Active Directory Registered APP Client Secret
             </summary>
         </member>
-        <member name="P:Frends.Office.InputExcelSharepoint.driveID">
+        <member name="P:Frends.Office.ExportFileToSharepointInput.tenantID">
             <summary>
-            Azure AD Drive ID
+            Azure Active Directory tenant ID
             </summary>
         </member>
-        <member name="P:Frends.Office.InputExcelSharepoint.targetFolderName">
+        <member name="P:Frends.Office.ExportFileToSharepointInput.siteID">
             <summary>
-            Target folder path
+            Azure Active Directory Site ID
             </summary>
         </member>
-        <member name="T:Frends.Office.ExcelToSharepointTask">
+        <member name="P:Frends.Office.ExportFileToSharepointInput.driveID">
+            <summary>
+            Azure Active Directory Drive ID
+            </summary>
+        </member>
+        <member name="P:Frends.Office.ExportFileToSharepointInput.targetFolderPath">
+            <summary>
+            Target folder name on Sharepoint.
+            </summary>
+        </member>
+        <member name="T:Frends.Office.ExportFileToSharepointTask">
             <summary>
             Office task for sending excel to sharepoint.
             </summary>
-            
         </member>
-        <member name="M:Frends.Office.ExcelToSharepointTask.ExcelToSharepoint(Frends.Office.InputExcelSharepoint)">
+        <member name="M:Frends.Office.ExportFileToSharepointTask.ExportFileToSharepoint(Frends.Office.ExportFileToSharepointInput)">
             <summary>
-            Allows you to send excel files to sharepoint. https://github.com/MarcinMichnik-HiQ/Frends.Office
+            Allows you to send files to sharepoint. Repository: https://github.com/MarcinMichnik-HiQ/Frends.Office
             </summary>
-            <param name="inputExcelSharepoint"></param>
-            <returns>Returns true if the file was written to correctly Otherwise throws an exception</returns>
+            <param name="input"></param>
+            <returns>Returns JToken.</returns>
         </member>
-        <member name="T:Frends.Office.InputWriteExcel">
+        <member name="T:Frends.Office.WriteExcelFileInput">
             <summary>
-            Input for the excel task
+            Input for file writers.
             </summary>
         </member>
-        <member name="P:Frends.Office.InputWriteExcel.csvString">
+        <member name="P:Frends.Office.WriteExcelFileInput.csv">
             <summary>
             Input csv string.
             </summary>
         </member>
-        <member name="P:Frends.Office.InputWriteExcel.delimiter">
+        <member name="P:Frends.Office.WriteExcelFileInput.cellDelimiter">
             <summary>
             Determines what character will be used for splitting based on cell in csv. Deafult is ';'.
             </summary>
         </member>
-        <member name="P:Frends.Office.InputWriteExcel.lineDelimiter">
+        <member name="P:Frends.Office.WriteExcelFileInput.lineDelimiter">
             <summary>
             Determines what string will be used for splitting lines. Default is "\r\n".
             </summary>
         </member>
-        <member name="P:Frends.Office.InputWriteExcel.includeHeaders">
-            <summary>
-            If input csv includes column names (headers). Type boolean.
-            </summary>
-        </member>
-        <member name="P:Frends.Office.InputWriteExcel.path">
+        <member name="P:Frends.Office.WriteExcelFileInput.path">
             <summary>
             Full path of the target file to be written. File format should be .xlsx, e.g. FileName.xlsx
             </summary>
         </member>
-        <member name="M:Frends.Office.InputWriteExcel.ExportToExcel">
+        <member name="M:Frends.Office.WriteExcelFileInput.CsvToDataTable">
             <summary>
             This method parses the input csv string and returns DataTable object.
             </summary>
         </member>
-        <member name="T:Frends.Office.WriteExcelTask">
+        <member name="T:Frends.Office.WriteExcelFileTask">
             <summary>
-            Office task package for handling files, e.g. Excel.
+            Used for writing Excel files.
             </summary>
-            
         </member>
-        <member name="M:Frends.Office.WriteExcelTask.WriteExcel(Frends.Office.InputWriteExcel)">
+        <member name="M:Frends.Office.WriteExcelFileTask.WriteExcelFile(Frends.Office.WriteExcelFileInput)">
             <summary>
-            Allows you to write excel files in .xlsx format. https://github.com/MarcinMichnik-HiQ/Frends.Office
+            Allows you to write excel files in .xlsx format. Repository: https://github.com/MarcinMichnik-HiQ/Frends.Office
             </summary>
-            <param name="inputWriteExcel"></param>
-            <returns>Returns true if the file was written to correctly Otherwise throws an exception</returns>
+            <param name="input"></param>
+            <returns>Returns JToken.</returns>
         </member>
         <member name="T:Frends.Office.Properties.Resources">
             <summary>
