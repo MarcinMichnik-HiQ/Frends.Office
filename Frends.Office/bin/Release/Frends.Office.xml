@@ -9,16 +9,6 @@
             Input class for exporting files to Sharepoint.
             </summary>
         </member>
-        <member name="M:Frends.Office.ExportFileToSharepointInput.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
-            <summary>
-            Constructor used foor deriving fileName from sourceFilePath.
-            </summary>
-        </member>
-        <member name="P:Frends.Office.ExportFileToSharepointInput.fileName">
-            <summary>
-            File name derived from sourceFilePath.
-            </summary>
-        </member>
         <member name="P:Frends.Office.ExportFileToSharepointInput.sourceFilePath">
             <summary>
             Full path of the target file to be written, e.g. c:\FileName.xlsx

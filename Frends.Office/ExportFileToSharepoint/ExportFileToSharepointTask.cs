@@ -18,30 +18,6 @@ namespace Frends.Office
     public class ExportFileToSharepointInput : IExportFileToSharepointInput
     {
         /// <summary>
-        /// Constructor used foor deriving fileName from sourceFilePath.
-        /// </summary>
-        public ExportFileToSharepointInput(string sourceFilePath, string clientID,
-            string clientSecret, string tenantID, string siteID, string driveID, string targetFolderPath)
-        {
-            // Get fileName from the sourceFilePath
-            string[] sourcePathSplit = sourceFilePath.Split('\\');
-            fileName = sourcePathSplit.Last();
-
-            this.sourceFilePath = sourceFilePath;
-            this.clientID = clientID;
-            this.clientSecret = clientSecret;
-            this.tenantID = tenantID;
-            this.siteID = siteID;
-            this.driveID = driveID;
-            this.targetFolderPath = targetFolderPath;
-        }
-
-        /// <summary>
-        /// File name derived from sourceFilePath.
-        /// </summary>
-        public string fileName { get; }
-
-        /// <summary>
         /// Full path of the target file to be written, e.g. c:\FileName.xlsx
         /// </summary>
         [DefaultValue(@"c:\temp\file.xlsx")]
@@ -110,6 +86,10 @@ namespace Frends.Office
             string fileLength;
             string url = "";
 
+            // Get fileName from the sourceFilePath
+            string[] sourcePathSplit = input.sourceFilePath.Split('\\');
+            string fileName = sourcePathSplit.Last();
+
             try
             {
                 using (FileStream fileStream = System.IO.File.OpenRead(input.sourceFilePath))
@@ -134,7 +114,7 @@ namespace Frends.Office
                             .Sites[input.siteID]
                             .Drives[input.driveID]
                             .Root
-                            .ItemWithPath(input.targetFolderPath + input.fileName)
+                            .ItemWithPath(input.targetFolderPath + fileName)
                             .CreateUploadSession(uploadProps)
                             .Request()
                             .PostAsync();
@@ -172,7 +152,7 @@ namespace Frends.Office
             JToken taskResponse = JToken.Parse("{}");
             taskResponse["FileSize"] = fileLength;
             taskResponse["Path"] = input.sourceFilePath.ToString();
-            taskResponse["FileName"] = input.fileName.ToString();
+            taskResponse["FileName"] = fileName.ToString();
             taskResponse["TargetFolderName"] = input.targetFolderPath.ToString();
             taskResponse["ClientID"] = input.clientID;
             taskResponse["TenantID"] = input.tenantID.ToString();
