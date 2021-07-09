@@ -2,12 +2,12 @@
 {
     public interface IExportFileToSharepointInput
     {
-        string clientID { get; set; }
-        string clientSecret { get; set; }
-        string driveID { get; set; }
-        string siteID { get; set; }
-        string sourceFilePath { get; set; }
-        string targetFolderPath { get; set; }
-        string tenantID { get; set; }
+        string ClientID { get; set; }
+        string ClientSecret { get; set; }
+        string DriveID { get; set; }
+        string SiteID { get; set; }
+        string SourceFilePath { get; set; }
+        string TargetFolderPath { get; set; }
+        string TenantID { get; set; }
     }
 }

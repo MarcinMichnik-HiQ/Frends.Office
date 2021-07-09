@@ -11,35 +11,35 @@ namespace Frends.Office
     /// <summary>
     /// Input for file writers.
     /// </summary>
-    public class WriteExcelFileInput : IWriteExcelFileInput
+    public class WriteExcelFileInput : IWriteFileInput
     {
         /// <summary>
         /// Input csv string.
         /// </summary>
         [DefaultValue("\"1;2;3\\r\\na;b;c\"")]
         [DisplayFormat(DataFormatString = "Expression")]
-        public string csv { get; set; }
+        public string StringInput { get; set; }
 
         /// <summary>
         /// Determines what character will be used for splitting based on cell in csv. Deafult is ';'.
         /// </summary>
         [DefaultValue("';'")]
         [DisplayFormat(DataFormatString = "Expression")]
-        public char cellDelimiter { get; set; }
+        public char CellDelimiter { get; set; }
 
         /// <summary>
         /// Determines what string will be used for splitting lines. Default is "\r\n".
         /// </summary>
         [DefaultValue("\"\\r\\n\"")]
         [DisplayFormat(DataFormatString = "Expression")]
-        public string lineDelimiter { get; set; }
+        public string LineDelimiter { get; set; }
 
         /// <summary>
         /// Full path of the target file to be written. File format should be .xlsx, e.g. FileName.xlsx
         /// </summary>
         [DefaultValue(@"c:\temp\file.xlsx")]
         [DisplayFormat(DataFormatString = "Text")]
-        public string path { get; set; }
+        public string TargetPath { get; set; }
 
         /// <summary>
         /// This method parses the input csv string and returns DataTable object.

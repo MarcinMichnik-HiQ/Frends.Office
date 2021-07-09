@@ -22,43 +22,43 @@ namespace Frends.Office
         /// </summary>
         [DefaultValue(@"c:\temp\file.xlsx")]
         [DisplayFormat(DataFormatString = "Text")]
-        public string sourceFilePath { get; set; }
+        public string SourceFilePath { get; set; }
 
         /// <summary>
         /// Azure Active Directory Registered APP Client ID
         /// </summary>
         [DisplayFormat(DataFormatString = "Text")]
-        public string clientID { get; set; }
+        public string ClientID { get; set; }
 
         /// <summary>
         /// Azure Active Directory Registered APP Client Secret
         /// </summary>
         [DisplayFormat(DataFormatString = "Text")]
-        public string clientSecret { get; set; }
+        public string ClientSecret { get; set; }
 
         /// <summary>
         /// Azure Active Directory tenant ID
         /// </summary>
         [DisplayFormat(DataFormatString = "Text")]
-        public string tenantID { get; set; }
+        public string TenantID { get; set; }
 
         /// <summary>
         /// Azure Active Directory Site ID
         /// </summary>
         [DisplayFormat(DataFormatString = "Text")]
-        public string siteID { get; set; }
+        public string SiteID { get; set; }
 
         /// <summary>
         /// Azure Active Directory Drive ID
         /// </summary>
         [DisplayFormat(DataFormatString = "Text")]
-        public string driveID { get; set; }
+        public string DriveID { get; set; }
 
         /// <summary>
         /// Target folder name on Sharepoint.
         /// </summary>
         [DisplayFormat(DataFormatString = "Text")]
-        public string targetFolderPath { get; set; }
+        public string TargetFolderPath { get; set; }
     }
 
     /// <summary>
@@ -74,9 +74,9 @@ namespace Frends.Office
         public static async Task<JToken> ExportFileToSharepoint(ExportFileToSharepointInput input)
         {
             IConfidentialClientApplication confidentialClientApplication = ConfidentialClientApplicationBuilder
-                .Create(input.clientID)
-                .WithTenantId(input.tenantID)
-                .WithClientSecret(input.clientSecret)
+                .Create(input.ClientID)
+                .WithTenantId(input.TenantID)
+                .WithClientSecret(input.ClientSecret)
                 .Build();
 
             ClientCredentialProvider authProvider = new ClientCredentialProvider(confidentialClientApplication);
@@ -87,12 +87,12 @@ namespace Frends.Office
             string url = "";
 
             // Get fileName from the sourceFilePath
-            string[] sourcePathSplit = input.sourceFilePath.Split('\\');
+            string[] sourcePathSplit = input.SourceFilePath.Split('\\');
             string fileName = sourcePathSplit.Last();
 
             try
             {
-                using (FileStream fileStream = System.IO.File.OpenRead(input.sourceFilePath))
+                using (FileStream fileStream = System.IO.File.OpenRead(input.SourceFilePath))
                 {
                     fileLength = fileStream.Length.ToString();
                     try
@@ -111,10 +111,10 @@ namespace Frends.Office
                         // Create the upload session
                         // itemPath does not need to be a path to an existing item
                         UploadSession uploadSession = await graphClient
-                            .Sites[input.siteID]
-                            .Drives[input.driveID]
+                            .Sites[input.SiteID]
+                            .Drives[input.DriveID]
                             .Root
-                            .ItemWithPath(input.targetFolderPath + fileName)
+                            .ItemWithPath(input.TargetFolderPath + fileName)
                             .CreateUploadSession(uploadProps)
                             .Request()
                             .PostAsync();
@@ -151,13 +151,13 @@ namespace Frends.Office
 
             JToken taskResponse = JToken.Parse("{}");
             taskResponse["FileSize"] = fileLength;
-            taskResponse["Path"] = input.sourceFilePath.ToString();
+            taskResponse["Path"] = input.SourceFilePath.ToString();
             taskResponse["FileName"] = fileName.ToString();
-            taskResponse["TargetFolderName"] = input.targetFolderPath.ToString();
-            taskResponse["ClientID"] = input.clientID;
-            taskResponse["TenantID"] = input.tenantID.ToString();
-            taskResponse["SiteID"] = input.siteID.ToString();
-            taskResponse["DriveID"] = input.driveID.ToString();
+            taskResponse["TargetFolderName"] = input.TargetFolderPath.ToString();
+            taskResponse["ClientID"] = input.ClientID;
+            taskResponse["TenantID"] = input.TenantID.ToString();
+            taskResponse["SiteID"] = input.SiteID.ToString();
+            taskResponse["DriveID"] = input.DriveID.ToString();
             taskResponse["UploadUrl"] = url;
 
             return taskResponse;
