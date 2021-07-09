@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Frends.Office
 {
     /// <summary>
-    /// Input for file writers.
+    /// Input for excel file writers.
     /// </summary>
     public class WriteExcelFileInput : IWriteFileInput
     {
@@ -40,14 +40,61 @@ namespace Frends.Office
         [DefaultValue(@"c:\temp\file.xlsx")]
         [DisplayFormat(DataFormatString = "Text")]
         public string TargetPath { get; set; }
+    }
+
+    /// <summary>
+    /// Used for writing Excel files.
+    /// </summary>
+    public class WriteExcelFileTask
+    {
+        /// <summary>
+        /// Allows you to write excel files in .xlsx format. Repository: https://github.com/MarcinMichnik-HiQ/Frends.Office
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>Returns JToken.</returns>
+        public static JToken WriteExcelFile([PropertyTab] WriteExcelFileInput input)
+        {
+            JToken taskResponse = JToken.Parse("{}");
+            IXLWorkbook workbook = new XLWorkbook();
+            DataTable dataTable;
+
+            try
+            {
+                dataTable = CsvToDataTable(input.StringInput, input.LineDelimiter, input.CellDelimiter);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unable to build DataTable from csv.", ex);
+            }
+
+            IXLWorksheet mainWorksheet = workbook.Worksheets.Add(dataTable, "Default");
+
+            // Adjust rows and columns to text length
+            mainWorksheet.Rows().AdjustToContents();
+            mainWorksheet.Columns().AdjustToContents();
+
+            try
+            {
+                workbook.SaveAs(input.TargetPath);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unable to save the file.", ex);
+            }
+
+            taskResponse["message"] = "The file has been written correctly.";
+            taskResponse["filePath"] = input.TargetPath;
+
+            return taskResponse;
+        }
 
         /// <summary>
         /// This method parses the input csv string and returns DataTable object.
         /// </summary>
-        public DataTable CsvToDataTable()
+        public static DataTable CsvToDataTable(string input, string lineDelimiter, char cellDelimiter)
         {
             List<Dictionary<string, string>> parsedResult = new List<Dictionary<string, string>>();
-            string[] records = csv.Split(new string[] { lineDelimiter }, StringSplitOptions.None);
+            string[] records = input.Split(new string[] { lineDelimiter }, StringSplitOptions.None);
 
             DataTable table = new DataTable();
             int recordsPerLine = 0;
@@ -88,53 +135,6 @@ namespace Frends.Office
                 table.Rows.Add(workRow);
             }
             return table;
-        }
-    }
-
-    /// <summary>
-    /// Used for writing Excel files.
-    /// </summary>
-    public class WriteExcelFileTask
-    {
-        /// <summary>
-        /// Allows you to write excel files in .xlsx format. Repository: https://github.com/MarcinMichnik-HiQ/Frends.Office
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns>Returns JToken.</returns>
-        public static JToken WriteExcelFile(WriteExcelFileInput input)
-        {
-            JToken taskResponse = JToken.Parse("{}");
-            IXLWorkbook workbook = new XLWorkbook();
-            DataTable dataTable;
-
-            try
-            {
-                dataTable = input.CsvToDataTable();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Unable to build DataTable from csv.", ex);
-            }
-
-            IXLWorksheet mainWorksheet = workbook.Worksheets.Add(dataTable, "Default");
-
-            // Adjust rows and columns to text length
-            mainWorksheet.Rows().AdjustToContents();
-            mainWorksheet.Columns().AdjustToContents();
-
-            try
-            {
-                workbook.SaveAs(input.path);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Unable to save the file.", ex);
-            }
-
-            taskResponse["message"] = "The file has been written correctly.";
-            taskResponse["filePath"] = input.path;
-
-            return taskResponse;
         }
     }
 }

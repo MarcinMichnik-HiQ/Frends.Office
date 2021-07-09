@@ -71,7 +71,7 @@ namespace Frends.Office
         /// </summary>
         /// <param name="input"></param>
         /// <returns>Returns JToken.</returns>
-        public static async Task<JToken> ExportFileToSharepoint(ExportFileToSharepointInput input)
+        public static async Task<JToken> ExportFileToSharepoint([PropertyTab] ExportFileToSharepointInput input)
         {
             IConfidentialClientApplication confidentialClientApplication = ConfidentialClientApplicationBuilder
                 .Create(input.ClientID)

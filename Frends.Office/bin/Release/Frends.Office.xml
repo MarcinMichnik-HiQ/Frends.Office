@@ -9,37 +9,37 @@
             Input class for exporting files to Sharepoint.
             </summary>
         </member>
-        <member name="P:Frends.Office.ExportFileToSharepointInput.sourceFilePath">
+        <member name="P:Frends.Office.ExportFileToSharepointInput.SourceFilePath">
             <summary>
             Full path of the target file to be written, e.g. c:\FileName.xlsx
             </summary>
         </member>
-        <member name="P:Frends.Office.ExportFileToSharepointInput.clientID">
+        <member name="P:Frends.Office.ExportFileToSharepointInput.ClientID">
             <summary>
             Azure Active Directory Registered APP Client ID
             </summary>
         </member>
-        <member name="P:Frends.Office.ExportFileToSharepointInput.clientSecret">
+        <member name="P:Frends.Office.ExportFileToSharepointInput.ClientSecret">
             <summary>
             Azure Active Directory Registered APP Client Secret
             </summary>
         </member>
-        <member name="P:Frends.Office.ExportFileToSharepointInput.tenantID">
+        <member name="P:Frends.Office.ExportFileToSharepointInput.TenantID">
             <summary>
             Azure Active Directory tenant ID
             </summary>
         </member>
-        <member name="P:Frends.Office.ExportFileToSharepointInput.siteID">
+        <member name="P:Frends.Office.ExportFileToSharepointInput.SiteID">
             <summary>
             Azure Active Directory Site ID
             </summary>
         </member>
-        <member name="P:Frends.Office.ExportFileToSharepointInput.driveID">
+        <member name="P:Frends.Office.ExportFileToSharepointInput.DriveID">
             <summary>
             Azure Active Directory Drive ID
             </summary>
         </member>
-        <member name="P:Frends.Office.ExportFileToSharepointInput.targetFolderPath">
+        <member name="P:Frends.Office.ExportFileToSharepointInput.TargetFolderPath">
             <summary>
             Target folder name on Sharepoint.
             </summary>
@@ -58,32 +58,27 @@
         </member>
         <member name="T:Frends.Office.WriteExcelFileInput">
             <summary>
-            Input for file writers.
+            Input for excel file writers.
             </summary>
         </member>
-        <member name="P:Frends.Office.WriteExcelFileInput.csv">
+        <member name="P:Frends.Office.WriteExcelFileInput.StringInput">
             <summary>
             Input csv string.
             </summary>
         </member>
-        <member name="P:Frends.Office.WriteExcelFileInput.cellDelimiter">
+        <member name="P:Frends.Office.WriteExcelFileInput.CellDelimiter">
             <summary>
             Determines what character will be used for splitting based on cell in csv. Deafult is ';'.
             </summary>
         </member>
-        <member name="P:Frends.Office.WriteExcelFileInput.lineDelimiter">
+        <member name="P:Frends.Office.WriteExcelFileInput.LineDelimiter">
             <summary>
             Determines what string will be used for splitting lines. Default is "\r\n".
             </summary>
         </member>
-        <member name="P:Frends.Office.WriteExcelFileInput.path">
+        <member name="P:Frends.Office.WriteExcelFileInput.TargetPath">
             <summary>
             Full path of the target file to be written. File format should be .xlsx, e.g. FileName.xlsx
-            </summary>
-        </member>
-        <member name="M:Frends.Office.WriteExcelFileInput.CsvToDataTable">
-            <summary>
-            This method parses the input csv string and returns DataTable object.
             </summary>
         </member>
         <member name="T:Frends.Office.WriteExcelFileTask">
@@ -97,6 +92,11 @@
             </summary>
             <param name="input"></param>
             <returns>Returns JToken.</returns>
+        </member>
+        <member name="M:Frends.Office.WriteExcelFileTask.CsvToDataTable(System.String,System.String,System.Char)">
+            <summary>
+            This method parses the input csv string and returns DataTable object.
+            </summary>
         </member>
         <member name="T:Frends.Office.Properties.Resources">
             <summary>
@@ -113,6 +113,38 @@
               Przesłania właściwość CurrentUICulture bieżącego wątku dla wszystkich
               przypadków przeszukiwania zasobów za pomocą tej klasy zasobów wymagającej zdefiniowania typu.
             </summary>
+        </member>
+        <member name="T:Frends.Office.WriteWordFileInput">
+            <summary>
+            Input for file writers.
+            </summary>
+        </member>
+        <member name="P:Frends.Office.WriteWordFileInput.StringInput">
+            <summary>
+            Input string data.
+            </summary>
+        </member>
+        <member name="P:Frends.Office.WriteWordFileInput.LineDelimiter">
+            <summary>
+            Determines what string will be used for splitting lines. Default is "\r\n".
+            </summary>
+        </member>
+        <member name="P:Frends.Office.WriteWordFileInput.TargetPath">
+            <summary>
+            Full path of the target file to be written. File format should be .docx, e.g. FileName.docx
+            </summary>
+        </member>
+        <member name="T:Frends.Office.WriteWordFileTask">
+            <summary>
+            Used for writing Excel files.
+            </summary>
+        </member>
+        <member name="M:Frends.Office.WriteWordFileTask.WriteWordFile(Frends.Office.WriteWordFileInput)">
+            <summary>
+            Allows you to write word files in .docx format. Repository: https://github.com/MarcinMichnik-HiQ/Frends.Office
+            </summary>
+            <param name="input"></param>
+            <returns>Returns JToken.</returns>
         </member>
     </members>
 </doc>

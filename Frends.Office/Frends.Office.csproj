@@ -95,7 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExportFileToSharepoint\ExportFileToSharepointTask.cs" />
-    <Compile Include="ExportFileToSharepoint\IExportFileToSharepointInput.cs" />
+    <Compile Include="Interfaces\IExportFileToSharepointInput.cs" />
     <Compile Include="Interfaces\IWriteFileInput.cs" />
     <Compile Include="WriteExcelFile\WriteExcelFileTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,6 +109,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Frends.Office.nuspec" />
+    <None Include="FrendsTaskMetadata.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

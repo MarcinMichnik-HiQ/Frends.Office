@@ -1,0 +1,13 @@
+﻿{
+  "Tasks": [
+    {
+      "TaskMethod": "Frends.Office.ExportFileToSharepointTask.ExportFileToSharepoint"
+    },
+    {
+      "TaskMethod": "Frends.Office.WriteExcelFileTask.WriteExcelFile"
+    },
+    {
+      "TaskMethod": "Frends.Office.WriteWordFileTask.WriteWordFile"
+    }
+  ]
+}
