@@ -35,7 +35,7 @@ Reads string and creates a word file.
 
 ### Returns
 
-JToken with keys: message, savedTo, rows.
+JToken with keys: message, savedTo.
 
 ## ExportFileToSharepointTask
 
