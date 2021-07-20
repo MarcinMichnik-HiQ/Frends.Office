@@ -55,7 +55,29 @@ namespace Frends.Office
         public static JToken WriteExcelFile([PropertyTab] WriteExcelFileInput input)
         {
             JToken taskResponse = JToken.Parse("{}");
-            IXLWorkbook workbook = new XLWorkbook();
+
+            XLWorkbook workbook = CreateWorkbookObject(input);
+            try
+            {
+                workbook.SaveAs(input.TargetPath);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unable to save the file.", ex);
+            }
+
+            taskResponse["message"] = "The file has been written correctly.";
+            taskResponse["filePath"] = input.TargetPath;
+
+            return taskResponse;
+        }
+
+        /// <summary>
+        /// This method creates an excel object from string input.
+        /// </summary>
+        public static XLWorkbook CreateWorkbookObject(WriteExcelFileInput input)
+        {
+            XLWorkbook workbook = new XLWorkbook();
             DataTable dataTable;
 
             try
@@ -73,19 +95,7 @@ namespace Frends.Office
             mainWorksheet.Rows().AdjustToContents();
             mainWorksheet.Columns().AdjustToContents();
 
-            try
-            {
-                workbook.SaveAs(input.TargetPath);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Unable to save the file.", ex);
-            }
-
-            taskResponse["message"] = "The file has been written correctly.";
-            taskResponse["filePath"] = input.TargetPath;
-
-            return taskResponse;
+            return workbook;
         }
 
         /// <summary>
@@ -93,48 +103,52 @@ namespace Frends.Office
         /// </summary>
         public static DataTable CsvToDataTable(string input, string lineDelimiter, char cellDelimiter)
         {
-            List<Dictionary<string, string>> parsedResult = new List<Dictionary<string, string>>();
-            string[] records = input.Split(new string[] { lineDelimiter }, StringSplitOptions.None);
+            List<Dictionary<string, string>> parsed = new List<Dictionary<string, string>>();
+            string[] rows = input.Split(new string[] { lineDelimiter }, StringSplitOptions.None);
 
-            DataTable table = new DataTable();
-            int recordsPerLine = 0;
+            DataTable tableResult = new DataTable();
 
-            foreach (string record in records)
+            // Populate list of dictionaries
+            foreach (string row in rows)
             {
-                recordsPerLine = 0;
-                string[] fields = record.Split(cellDelimiter);
+                string[] cells = row.Split(cellDelimiter);
                 Dictionary<string, string> recordItem = new Dictionary<string, string>();
+
                 int i = 0;
-                foreach (string field in fields)
+                foreach (string cell in cells)
                 {
-                    recordItem.Add(i.ToString(), field);
+                    recordItem.Add(i.ToString(), cell);
                     i++;
-                    recordsPerLine++;
                 }
-                parsedResult.Add(recordItem);
+                parsed.Add(recordItem);
             }
 
-            Dictionary<string, string> row = parsedResult[0];
-            foreach (KeyValuePair<string, string> pair in row)
-            {
-                table.Columns.Add(pair.Value);
-            }
-            parsedResult.RemoveAt(0);
-
-            foreach (Dictionary<string, string> dic in parsedResult)
-            {
-                DataRow workRow = table.NewRow();
-
-                int counter = 0;
-                foreach (KeyValuePair<string, string> y in dic)
+            if (rows.Length > 0) {
+                // Create columns. Their values will be first row values. This first row must not be included later to avoid duplicates.
+                Dictionary<string, string> firstRow = parsed[0];
+                foreach (KeyValuePair<string, string> pair in firstRow)
                 {
-                    workRow[counter] = y.Value;
-                    counter++;
+                    tableResult.Columns.Add(pair.Value);
                 }
+                parsed.RemoveAt(0);
 
-                table.Rows.Add(workRow);
+                // Populate rows except for first one (column names)
+                foreach (Dictionary<string, string> dic in parsed)
+                {
+                    DataRow workRow = tableResult.NewRow();
+
+                    int counter = 0;
+                    foreach (KeyValuePair<string, string> y in dic)
+                    {
+                        workRow[counter] = y.Value;
+                        counter++;
+                    }
+
+                    tableResult.Rows.Add(workRow);
+                }
             }
-            return table;
+
+            return tableResult;
         }
     }
 }

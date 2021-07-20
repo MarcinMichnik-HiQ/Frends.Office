@@ -51,7 +51,6 @@ namespace Frends.Office
         public static JToken WriteWordFile([PropertyTab] WriteWordFileInput input)
         {
             JToken taskResponse = JToken.Parse("{}");
-            int rowCounter = 0;
             try
             {
                 using (WordprocessingDocument wordDocument =
@@ -66,11 +65,11 @@ namespace Frends.Office
                     Paragraph para = body.AppendChild(new Paragraph());
                     Run run = para.AppendChild(new Run());
 
-                    string[] records = BreakByLines(input.StringInput, input.LineDelimiter);
+                    string[] records = input.StringInput.Split(new string[] { input.LineDelimiter }, StringSplitOptions.None);
+
                     foreach (string record in records) {
                         run.AppendChild(new Text(record));
                         run.Append(new Break());
-                        rowCounter++;
                     }
                 }
             }
@@ -81,15 +80,8 @@ namespace Frends.Office
 
             taskResponse["message"] = "The file has been written correctly.";
             taskResponse["savedTo"] = input.TargetPath;
-            taskResponse["rows"] = rowCounter;
 
             return taskResponse;
-        }
-
-        public static string[] BreakByLines(string input, string delimiter) {
-            string[] result = input.Split(new string[] { delimiter }, StringSplitOptions.None);
-
-            return result;
         }
     }
 }
