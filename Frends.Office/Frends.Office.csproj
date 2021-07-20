@@ -95,7 +95,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExportFileToSharepoint\ExportFileToSharepointTask.cs" />
-    <Compile Include="Interfaces\IExportFileToSharepointInput.cs" />
     <Compile Include="Interfaces\IWriteFileInput.cs" />
     <Compile Include="WriteExcelFile\WriteExcelFileTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

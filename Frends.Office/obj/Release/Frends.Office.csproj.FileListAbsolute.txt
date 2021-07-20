@@ -18,7 +18,6 @@ C:\Users\Marcin\Documents\Frends.Office\Frends.Office\Frends.Office\obj\Release\
 C:\Users\Marcin\Documents\Frends.Office\Frends.Office\Frends.Office\obj\Release\Frends.Office.csproj.CopyComplete
 C:\Users\Marcin\Documents\Frends.Office\Frends.Office\Frends.Office\bin\Release\Frends.Office.dll.config
 C:\Users\Marcin\Documents\arch\Frends.Office\Frends.Office\Frends.Office\bin\Release\Frends.Office.xml
-C:\Users\Marcin\Documents\arch\Frends.Office\Frends.Office\Frends.Office\obj\Release\Frends.Office.csprojAssemblyReference.cache
 C:\Users\Marcin\Documents\arch\Frends.Office\Frends.Office\Frends.Office\obj\Release\Frends.Office.dll
 C:\Users\Marcin\Documents\arch\Frends.Office\Frends.Office\Frends.Office\obj\Release\Frends.Office.pdb
 C:\Users\Marcin\Documents\arch\Frends.Office\Frends.Office\Frends.Office\bin\Release\Frends.Office.dll.config
@@ -57,3 +56,4 @@ C:\Users\Marcin\Documents\arch\Frends.Office\Frends.Office\Frends.Office\bin\Rel
 C:\Users\Marcin\Documents\arch\Frends.Office\Frends.Office\Frends.Office\bin\Release\System.Diagnostics.DiagnosticSource.xml
 C:\Users\Marcin\Documents\arch\Frends.Office\Frends.Office\Frends.Office\bin\Release\System.Memory.xml
 C:\Users\Marcin\Documents\arch\Frends.Office\Frends.Office\Frends.Office\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Marcin\Documents\arch\Frends.Office\Frends.Office\Frends.Office\obj\Release\Frends.Office.csproj.AssemblyReference.cache

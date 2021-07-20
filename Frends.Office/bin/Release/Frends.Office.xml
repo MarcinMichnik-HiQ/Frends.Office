@@ -4,56 +4,57 @@
         <name>Frends.Office</name>
     </assembly>
     <members>
-        <member name="T:Frends.Office.ExportFileToSharepointInput">
+        <member name="T:Frends.Office.ExportFileInput">
             <summary>
-            Input class for exporting files to Sharepoint.
+            Input data class for exporting files to Sharepoint.
             </summary>
         </member>
-        <member name="P:Frends.Office.ExportFileToSharepointInput.SourceFilePath">
+        <member name="P:Frends.Office.ExportFileInput.SourceFilePath">
             <summary>
             Full path of the target file to be written, e.g. c:\FileName.xlsx
             </summary>
         </member>
-        <member name="P:Frends.Office.ExportFileToSharepointInput.ClientID">
+        <member name="P:Frends.Office.ExportFileInput.TargetFolderPath">
             <summary>
-            Azure Active Directory Registered APP Client ID
+            Target folder path on Sharepoint.
             </summary>
         </member>
-        <member name="P:Frends.Office.ExportFileToSharepointInput.ClientSecret">
+        <member name="T:Frends.Office.SharepointAuthentication">
             <summary>
-            Azure Active Directory Registered APP Client Secret
+            Input data class for authenticating to Sharepoint.
             </summary>
         </member>
-        <member name="P:Frends.Office.ExportFileToSharepointInput.TenantID">
+        <member name="P:Frends.Office.SharepointAuthentication.ClientID">
             <summary>
-            Azure Active Directory tenant ID
+            Azure Active Directory Registered APP Client ID.
             </summary>
         </member>
-        <member name="P:Frends.Office.ExportFileToSharepointInput.SiteID">
+        <member name="P:Frends.Office.SharepointAuthentication.ClientSecret">
             <summary>
-            Azure Active Directory Site ID
+            Azure Active Directory Registered APP Client Secret.
             </summary>
         </member>
-        <member name="P:Frends.Office.ExportFileToSharepointInput.DriveID">
+        <member name="P:Frends.Office.SharepointAuthentication.TenantID">
             <summary>
-            Azure Active Directory Drive ID
+            Azure Active Directory tenant ID.
             </summary>
         </member>
-        <member name="P:Frends.Office.ExportFileToSharepointInput.TargetFolderPath">
+        <member name="P:Frends.Office.SharepointAuthentication.SiteID">
             <summary>
-            Target folder name on Sharepoint.
+            Sharepoint Site ID - retrievable from Microsoft API once the site is created.
             </summary>
         </member>
         <member name="T:Frends.Office.ExportFileToSharepointTask">
             <summary>
-            Office task for sending excel to sharepoint.
+            Office task for sending files to sharepoint.
             </summary>
         </member>
-        <member name="M:Frends.Office.ExportFileToSharepointTask.ExportFileToSharepoint(Frends.Office.ExportFileToSharepointInput)">
+        <member name="M:Frends.Office.ExportFileToSharepointTask.ExportFileToSharepoint(Frends.Office.ExportFileInput,Frends.Office.SharepointAuthentication)">
             <summary>
             Allows you to send files to sharepoint. Repository: https://github.com/MarcinMichnik-HiQ/Frends.Office
             </summary>
-            <param name="input"></param>
+            <param name="fileExportInput"></param>
+            <param name="authentication"></param>
             <returns>Returns JToken.</returns>
         </member>
         <member name="T:Frends.Office.WriteExcelFileInput">

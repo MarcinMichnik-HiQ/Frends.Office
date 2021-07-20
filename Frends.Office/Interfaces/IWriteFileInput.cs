@@ -6,5 +6,6 @@ namespace Frends.Office
     {
         string StringInput { get; set; }
         string TargetPath { get; set; }
+        string LineDelimiter { get; set; }
     }
 }
