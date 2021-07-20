@@ -1,4 +1,4 @@
-﻿{
+{
   "Tasks": [
     {
       "TaskMethod": "Frends.Office.ExportFileToSharepointTask.ExportFileToSharepoint"
