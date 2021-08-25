@@ -31,6 +31,13 @@ namespace Frends.Office
         public string LineDelimiter { get; set; }
 
         /// <summary>
+        /// Determines what string will be used for splitting pages. Default is "\br".
+        /// </summary>
+        [DefaultValue("\"\\br\"")]
+        [DisplayFormat(DataFormatString = "Expression")]
+        public string PageDelimiter { get; set; }
+
+        /// <summary>
         /// Full path of the target file to be written. File format should be .docx, e.g. FileName.docx
         /// </summary>
         [DefaultValue(@"c:\file.docx")]
@@ -65,11 +72,20 @@ namespace Frends.Office
                     Paragraph para = body.AppendChild(new Paragraph());
                     Run run = para.AppendChild(new Run());
 
-                    string[] records = input.StringInput.Split(new string[] { input.LineDelimiter }, StringSplitOptions.None);
+                    string[] pages = input.StringInput.Split(new string[] { input.PageDelimiter }, StringSplitOptions.None);
 
-                    foreach (string record in records) {
-                        run.AppendChild(new Text(record));
-                        run.Append(new Break());
+                    foreach (string page in pages)
+                    {
+
+                        string[] records = page.Split(new string[] { input.LineDelimiter }, StringSplitOptions.None);
+
+                        foreach (string record in records)
+                        {
+                            run.AppendChild(new Text(record));
+                            run.Append(new Break());
+                        }
+
+                        run.Append(new Break() { Type = BreakValues.Page });
                     }
                 }
             }
