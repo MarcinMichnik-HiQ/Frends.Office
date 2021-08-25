@@ -31,6 +31,7 @@ Reads string and creates a word file.
 | -------- | -------- | -------- | -------- |
 | StringInput | `string` | Input text string | `"Paragraph\r\nNewLine"` |
 | LineDelimiter | `string` | Determines what string will be used for splitting lines | `"\r\n"` |
+| PageDelimiter | `string` | Determines what string will be used for splitting pages | `"\br"` |
 | TargetPath | `string` | Full path of the target file to be written. File format should be .docx | `@"c:\temp\file.docx"` |
 
 ### Returns
